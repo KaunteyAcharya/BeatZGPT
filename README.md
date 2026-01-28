@@ -1,6 +1,8 @@
-# 🤖 AI Text Humanizer
+# AI Text Humanizer
 
 A production-ready tool that combines Unicode space character manipulation with sophisticated NLP-based sentence restructuring to reduce AI detection scores while maintaining text quality and readability.
+
+https://kaunteyacharya.github.io/BeatZGPT/
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -14,7 +16,7 @@ A production-ready tool that combines Unicode space character manipulation with 
 - **Configurable**: Fine-grained control over transformation intensity and techniques
 - **Analysis Tools**: Built-in metrics for readability, semantic similarity, and AI detection risk
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -111,7 +113,7 @@ Replaces standard ASCII spaces (U+0020) with visually identical Unicode variants
 - **Phrase Substitution**: "in order to" → "to", "so as to"
 - **Formality Preservation**: Maintains academic/business/casual register
 
-## 📊 Performance Benchmarks
+## Performance Benchmarks
 
 | Metric | Target | Typical Result |
 |--------|--------|----------------|
@@ -120,7 +122,7 @@ Replaces standard ASCII spaces (U+0020) with visually identical Unicode variants
 | Readability Change | ±5% | ±3% |
 | Processing Speed | <2s/1000 words | 1.2-1.5s |
 
-## 🛠️ Configuration Options
+## Configuration Options
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
@@ -131,7 +133,7 @@ Replaces standard ASCII spaces (U+0020) with visually identical Unicode variants
 | `formality` | str | 'formal' | Formality level (formal/technical/casual) |
 | `quality_threshold` | float | 0.85 | Minimum semantic similarity |
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ai-text-humanizer/
@@ -155,7 +157,7 @@ ai-text-humanizer/
 └── examples/              # Example files
 ```
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Run all tests
@@ -168,40 +170,33 @@ pytest --cov=src tests/
 pytest tests/test_space_manipulation.py
 ```
 
-## 📚 Documentation
+## Documentation
 
 - [Architecture Guide](docs/ARCHITECTURE.md)
 - [API Reference](docs/API.md)
 - [Contributing Guidelines](docs/CONTRIBUTING.md)
 
-## ⚠️ Ethical Considerations
+## Ethical Considerations
 
 **This tool is intended for:**
-- ✅ Educational purposes and learning about AI detection
-- ✅ Improving writing quality and style
-- ✅ Understanding text transformation techniques
+-  Educational purposes and learning about AI detection
+-  Improving writing quality and style
+- Understanding text transformation techniques
 
 **NOT intended for:**
-- ❌ Academic dishonesty or plagiarism
-- ❌ Evading detection in contexts requiring transparency
-- ❌ Violating platform Terms of Service
+-  Academic dishonesty or plagiarism
+-  Evading detection in contexts requiring transparency
+-  Violating platform Terms of Service
 
 **Important**: Always disclose AI assistance when required by your institution or platform.
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions are welcome! Please read [CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines.
 
-## 📄 License
+##  License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Inspired by [zero-zerogpt](https://github.com/zero-zerogpt) for Unicode space manipulation concept
-- Built with [spaCy](https://spacy.io/), [NLTK](https://www.nltk.org/), and [sentence-transformers](https://www.sbert.net/)
-
-## 📧 Contact
 
 For questions or support, please open an issue on GitHub.
 
