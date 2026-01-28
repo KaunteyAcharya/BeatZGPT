@@ -258,66 +258,6 @@
             Do not use it for academic dishonesty or to violate platform Terms of Service.
         </div>
 
-        <div
-            style="background: rgba(99, 102, 241, 0.1); border-left: 4px solid var(--primary); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0.5rem;">
-            <h3 style="color: var(--primary); margin-bottom: 1rem;">💡 Best Results Workflow</h3>
-            <p style="margin-bottom: 1rem;"><strong>For maximum effectiveness, follow this 3-step process:</strong></p>
-
-            <div style="background: var(--bg-card); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
-                <p style="margin-bottom: 0.5rem;"><strong>Step 1: Pre-process with ChatGPT</strong></p>
-                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Use this prompt to
-                    rewrite your AI text first:</p>
-                <details style="margin-top: 0.5rem;">
-                    <summary style="cursor: pointer; color: var(--primary); font-weight: 500;">Click to view full
-                        ChatGPT prompt</summary>
-                    <div
-                        style="background: var(--bg-input); padding: 1rem; border-radius: 0.5rem; font-family: monospace; font-size: 0.8rem; line-height: 1.6; margin-top: 0.5rem; max-height: 300px; overflow-y: auto;">
-                        <p style="margin-bottom: 0.5rem;">"I have a block of AI-generated text that I want to revise so
-                            it sounds like it was written by a human. Please improve it using the following guidelines:
-                        </p>
-                        <ul style="margin-left: 1.5rem; margin-bottom: 0.5rem;">
-                            <li>Vary sentence structure and sentence length to increase burstiness</li>
-                            <li>Introduce intellectual hesitation (e.g., "may suggest", "appears to", "is likely to")
-                            </li>
-                            <li>Add nuance, subtle critique, or alternative perspectives where appropriate</li>
-                            <li>Avoid overused or generic AI vocabulary like "delve," "robust," "innovative," etc.</li>
-                            <li>Use more natural transitions (and not too many like "therefore", "moreover", "in
-                                conclusion")</li>
-                            <li>Replace vague examples with specific, relatable, or realistic details</li>
-                            <li>Adjust tone and style so it sounds less polished and more human (a little informal is
-                                okay)</li>
-                            <li>If relevant, include first-person voice or a light anecdotal tone</li>
-                            <li>Break repetition in how sentences begin (e.g., don't start every sentence with "This
-                                study…" or "It is important…")</li>
-                            <li>Do not use em dashes</li>
-                            <li>Preserve the *original meaning* and context, but improve naturalness and authenticity
-                            </li>
-                        </ul>
-                        <p>Here is the AI-generated text:"</p>
-                    </div>
-                </details>
-            </div>
-
-            <div style="background: var(--bg-card); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
-                <p style="margin-bottom: 0.5rem;"><strong>Step 2: Humanize with BeatZGPT</strong></p>
-                <p style="font-size: 0.9rem; color: var(--text-secondary);">Paste ChatGPT's output below and click
-                    "Humanize Text" to apply Unicode space manipulation.</p>
-            </div>
-
-            <div style="background: var(--bg-card); padding: 1rem; border-radius: 0.5rem;">
-                <p style="margin-bottom: 0.5rem;"><strong>Step 3: Verify with AI Detector</strong></p>
-                <p style="font-size: 0.9rem; color: var(--text-secondary);">Test the humanized output with <a
-                        href="https://zerogpt.com" target="_blank" style="color: var(--primary);">ZeroGPT</a>, <a
-                        href="https://gptzero.me" target="_blank" style="color: var(--primary);">GPTZero</a>, or similar
-                    detectors to verify effectiveness.</p>
-            </div>
-
-            <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-secondary);"><em>Note: This web demo uses
-                    Unicode manipulation only. For advanced features (syntax restructuring, semantic replacement), use
-                    the full Python version from the <a href="https://github.com/KaunteyAcharya/BZGPT" target="_blank"
-                        style="color: var(--primary);">GitHub repository</a>.</em></p>
-        </div>
-
         <div class="controls">
             <div class="control-group">
                 <label>Unicode Replacement Intensity: <span id="intensity-value">50%</span></label>
