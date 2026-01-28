@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Humanizer - Live Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --danger: #ef4444;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-input: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border: #475569;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1f3a 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .disclaimer {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid var(--danger);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 0.5rem;
+        }
+
+        .controls {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .control-group {
+            margin-bottom: 1rem;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-input);
+            border-radius: 5px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .editor-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .editor-pane {
+            background: var(--bg-card);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .pane-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            background: rgba(99, 102, 241, 0.1);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pane-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .word-count {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        textarea {
+            width: 100%;
+            height: 400px;
+            padding: 1.5rem;
+            background: var(--bg-input);
+            color: var(--text-primary);
+            border: none;
+            resize: vertical;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        textarea:focus {
+            outline: none;
+        }
+
+        .btn {
+            padding: 0.875rem 1.75rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-input);
+        }
+
+        .metrics {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+
+        .metrics h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .metric {
+            background: var(--bg-input);
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .editor-container {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 AI Text Humanizer</h1>
+            <p class="subtitle">Reduce AI detection scores while preserving quality</p>
+        </header>
+
+        <div class="disclaimer">
+            <strong>⚠️ Ethical Use Notice:</strong> This tool is for educational purposes and improving writing quality.
+            Do not use it for academic dishonesty or to violate platform Terms of Service.
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label>Unicode Replacement Intensity: <span id="intensity-value">50%</span></label>
+                <input type="range" id="intensity" min="0" max="100" value="50">
+            </div>
+        </div>
+
+        <div class="editor-container">
+            <div class="editor-pane">
+                <div class="pane-header">
+                    <h3>Original Text</h3>
+                    <span class="word-count" id="original-count">0 words</span>
+                </div>
+                <textarea id="original-text" placeholder="Paste your AI-generated text here..."></textarea>
+            </div>
+
+            <div class="editor-pane">
+                <div class="pane-header">
+                    <h3>Humanized Text</h3>
+                    <span class="word-count" id="humanized-count">0 words</span>
+                </div>
+                <textarea id="humanized-text" placeholder="Humanized text will appear here..." readonly></textarea>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <button id="humanize-btn" class="btn btn-primary">Humanize Text</button>
+            <button id="copy-btn" class="btn btn-secondary" disabled>Copy to Clipboard</button>
+        </div>
+
+        <div id="metrics" class="metrics">
+            <h3>Transformation Results</h3>
+            <div class="metrics-grid">
+                <div class="metric">
+                    <div class="metric-label">Spaces Replaced</div>
+                    <div class="metric-value" id="metric-spaces">0</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Replacement Rate</div>
+                    <div class="metric-value" id="metric-rate">0%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Inspired by <a href="https://github.com/oct4pie/zero-zerogpt" target="_blank">zero-zerogpt</a> |
+            <a href="https://github.com/yourusername/ai-text-humanizer" target="_blank">View on GitHub</a>
+        </p>
+    </footer>
+
+    <script>
+        // Unicode space variants
+        const SPACE_VARIANTS = [
+            '\u00A0', // Non-Breaking Space
+            '\u2002', // En Space
+            '\u2003', // Em Space
+            '\u2009', // Thin Space
+            '\u200A', // Hair Space
+            '\u200B', // Zero-Width Space
+            '\u2007', // Figure Space
+            '\u202F', // Narrow No-Break Space
+        ];
+
+        const originalText = document.getElementById('original-text');
+        const humanizedText = document.getElementById('humanized-text');
+        const humanizeBtn = document.getElementById('humanize-btn');
+        const copyBtn = document.getElementById('copy-btn');
+        const intensitySlider = document.getElementById('intensity');
+        const intensityValue = document.getElementById('intensity-value');
+        const metricsDiv = document.getElementById('metrics');
+
+        // Update intensity display
+        intensitySlider.addEventListener('input', (e) => {
+            intensityValue.textContent = e.target.value + '%';
+        });
+
+        // Update word counts
+        function updateWordCount(text, element) {
+            const words = text.trim().split(/\s+/).filter(w => w.length > 0);
+            element.textContent = `${words.length} words`;
+        }
+
+        originalText.addEventListener('input', (e) => {
+            updateWordCount(e.target.value, document.getElementById('original-count'));
+        });
+
+        // Humanize function
+        function humanizeText(text, intensity) {
+            let result = '';
+            let spacesReplaced = 0;
+            const totalSpaces = (text.match(/ /g) || []).length;
+            const threshold = intensity / 100;
+
+            for (let char of text) {
+                if (char === ' ') {
+                    if (Math.random() < threshold) {
+                        const variant = SPACE_VARIANTS[Math.floor(Math.random() * SPACE_VARIANTS.length)];
+                        result += variant;
+                        spacesReplaced++;
+                    } else {
+                        result += char;
+                    }
+                } else {
+                    result += char;
+                }
+            }
+
+            return {
+                text: result,
+                spacesReplaced,
+                totalSpaces,
+                rate: totalSpaces > 0 ? (spacesReplaced / totalSpaces * 100).toFixed(1) : 0
+            };
+        }
+
+        // Humanize button click
+        humanizeBtn.addEventListener('click', () => {
+            const text = originalText.value.trim();
+
+            if (!text) {
+                alert('Please enter some text to humanize');
+                return;
+            }
+
+            const intensity = parseInt(intensitySlider.value);
+            const result = humanizeText(text, intensity);
+
+            humanizedText.value = result.text;
+            updateWordCount(result.text, document.getElementById('humanized-count'));
+
+            // Show metrics
+            document.getElementById('metric-spaces').textContent = result.spacesReplaced;
+            document.getElementById('metric-rate').textContent = result.rate + '%';
+            metricsDiv.style.display = 'block';
+
+            copyBtn.disabled = false;
+        });
+
+        // Copy to clipboard
+        copyBtn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(humanizedText.value);
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = '✓ Copied!';
+                copyBtn.style.background = 'var(--success)';
+
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                    copyBtn.style.background = '';
+                }, 2000);
+            } catch (error) {
+                alert('Failed to copy to clipboard');
+            }
+        });
+
+        // Initialize
+        updateWordCount('', document.getElementById('original-count'));
+        updateWordCount('', document.getElementById('humanized-count'));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Humanizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 AI Text Humanizer</h1>
+            <p class="subtitle">Reduce AI detection scores while preserving quality</p>
+        </header>
+
+        <div class="disclaimer">
+            <strong>⚠️ Ethical Use Notice:</strong> This tool is for educational purposes and improving writing quality. 
+            Do not use it for academic dishonesty or to violate platform Terms of Service.
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="intensity">Intensity: <span id="intensity-value">0.5</span></label>
+                <input type="range" id="intensity" min="0" max="1" step="0.1" value="0.5">
+            </div>
+
+            <div class="control-group">
+                <label for="formality">Formality:</label>
+                <select id="formality">
+                    <option value="formal" selected>Formal</option>
+                    <option value="technical">Technical</option>
+                    <option value="casual">Casual</option>
+                </select>
+            </div>
+
+            <div class="toggles">
+                <label class="toggle">
+                    <input type="checkbox" id="enable-syntax" checked>
+                    <span>Syntax Restructuring</span>
+                </label>
+                <label class="toggle">
+                    <input type="checkbox" id="enable-semantics" checked>
+                    <span>Semantic Replacement</span>
+                </label>
+                <label class="toggle">
+                    <input type="checkbox" id="enable-unicode" checked>
+                    <span>Unicode Manipulation</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="editor-container">
+            <div class="editor-pane">
+                <div class="pane-header">
+                    <h3>Original Text</h3>
+                    <span class="word-count" id="original-count">0 words</span>
+                </div>
+                <textarea id="original-text" placeholder="Paste your AI-generated text here..."></textarea>
+            </div>
+
+            <div class="editor-pane">
+                <div class="pane-header">
+                    <h3>Humanized Text</h3>
+                    <span class="word-count" id="humanized-count">0 words</span>
+                </div>
+                <textarea id="humanized-text" placeholder="Humanized text will appear here..." readonly></textarea>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button id="humanize-btn" class="btn btn-primary">
+                <span class="btn-text">Humanize Text</span>
+                <span class="loader" style="display: none;"></span>
+            </button>
+            <button id="copy-btn" class="btn btn-secondary" disabled>Copy to Clipboard</button>
+            <div class="export-group">
+                <button id="export-txt" class="btn btn-secondary" disabled>Export TXT</button>
+                <button id="export-docx" class="btn btn-secondary" disabled>Export DOCX</button>
+                <button id="export-pdf" class="btn btn-secondary" disabled>Export PDF</button>
+            </div>
+        </div>
+
+        <div id="metrics" class="metrics" style="display: none;">
+            <h3>Quality Metrics</h3>
+            <div class="metrics-grid">
+                <div class="metric">
+                    <span class="metric-label">Semantic Similarity</span>
+                    <span class="metric-value" id="metric-similarity">-</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Readability Change</span>
+                    <span class="metric-value" id="metric-readability">-</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">AI Risk Reduction</span>
+                    <span class="metric-value" id="metric-risk">-</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Spaces Replaced</span>
+                    <span class="metric-value" id="metric-spaces">-</span>
+                </div>
+            </div>
+            <div class="transformations">
+                <strong>Transformations Applied:</strong>
+                <span id="transformations-list">None</span>
+            </div>
+        </div>
+
+        <div id="error-message" class="error-message" style="display: none;"></div>
+    </div>
+
+    <footer>
+        <p>Inspired by <a href="https://github.com/zero-zerogpt" target="_blank">zero-zerogpt</a> | 
+        Open Source on <a href="#" target="_blank">GitHub</a></p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
